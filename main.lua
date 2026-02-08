@@ -14,6 +14,7 @@ table.unpack = table.unpack or unpack
 
 -- globals --
 
+DEBUG = true
 -- Current procress
 -- (*NOTE: this is vague. I wanted it to be some kind of "game mode", but I can't imagine a good implementation of this by now.)
 PROCEDURE = "none"
@@ -57,8 +58,12 @@ function love.update(dt)
 end
 
 function love.draw()
+    gr.drawBackground()
+
+    gr.drawAtpatList()
+
     -- ::temp
-    do
+    if DEBUG then
         gr.drawEditorDebug()
     end
 end

@@ -2,6 +2,10 @@
 -- Stores and edits the battle
 local editor = {}
 
+-- dependencies --
+
+local pmath = require("util.pmath")
+
 -- locales --
 
 local function getEmptyAtpat()
@@ -31,6 +35,15 @@ function editor:addAtpat()
     end
 
     self.sequence_size = self.sequence_size + 1
+end
+
+-- Deletes the ith attack pattern from ``attack_sequence``
+function editor:deleteAtpat(i)
+    table.remove(self.attack_sequence, i)
+    self.sequence_size = self.sequence_size - 1
+
+    -- So we don't get off bounds
+    self.atpat_index = pmath.clamp(self.atpat_index, 1, self.sequence_size)
 end
 
 return editor

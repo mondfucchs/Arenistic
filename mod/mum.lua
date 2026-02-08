@@ -29,11 +29,29 @@ function mum.addAtpat()
     end
 end
 
+-- Deletes the atpat_index th atpat {editor}
+function mum.deleteCurrentAtpat()
+    return function()
+        if ref.editor.sequence_size > 1 then
+            ref.editor:deleteAtpat(ref.editor.atpat_index)
+        end
+        return true
+    end
+end
+
 -- Moves the {editor}'s atpat_index ``d`` units
 function mum.moveAtpatIndex(d)
     return function()
         ref.editor.atpat_index =
             pmath.clamp( ref.editor.atpat_index + d, 1, ref.editor.sequence_size )
+        return true
+    end
+end
+
+-- Moves the {editor}'s atpat_index ``d`` units
+function mum.exhaustAtpatIndex(to)
+    return function()
+        ref.editor.atpat_index = ( to == "beginning" and 1 or ref.editor.sequence_size )
         return true
     end
 end

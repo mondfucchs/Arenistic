@@ -51,7 +51,12 @@ ui.double_keymap =
     ["alt+d"] = function()
         DEBUG = not DEBUG
         return true
-    end
+    end,
+
+    -- ::debug key
+    ["alt+p"] = function()
+        mreq:send("insertTile", { "squary_wall", math.random(6), math.random(6) })
+    end,
 }
 
 -- methods.callbacks --

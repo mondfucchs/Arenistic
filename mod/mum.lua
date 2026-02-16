@@ -4,6 +4,7 @@ local mum = {}
 
 -- dependencies --
 
+local asset = require("util.asset")
 local pmath = require("util.pmath")
 
 -- references to other modules
@@ -20,6 +21,9 @@ function mum.setRef(ui, editor, gr)
 end
 
 -- methods.tasks --
+
+-- tasks: attack sequence list
+do
 
 -- Adds a new atpat to {editor}
 function mum.addAtpat()
@@ -54,6 +58,23 @@ function mum.exhaustAtpatIndex(to)
         ref.editor.atpat_index = ( to == "beginning" and 1 or ref.editor.sequence_size )
         return true
     end
+end
+
+end
+
+-- tasks: editing attack pattern
+do
+
+-- Inserts a tile of preset ``preset`` in current attack pattern in positions ``x``, ``y``
+function mum.insertTile(preset, x, y)
+    return function ()
+        asset.sound.move:play()
+        ref.editor:addTile(preset, x, y)
+
+        return true
+    end
+end
+
 end
 
 return mum

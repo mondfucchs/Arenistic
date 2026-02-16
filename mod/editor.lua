@@ -14,7 +14,7 @@ local function getEmptyAtpat()
     for i = 1, 6 do
         hitting_spots[i] = {}
         for j = 1, 6 do
-            hitting_spots[i][j] = tile:new("angry_wall")
+            hitting_spots[i][j] = tile:new("empty")
         end
     end
 
@@ -53,6 +53,16 @@ function editor:deleteAtpat(i)
 
     -- So we don't get off bounds
     self.atpat_index = pmath.clamp(self.atpat_index, 1, self.sequence_size)
+end
+
+-- Adds tile of preset ``preset`` into current attack pattern in position ``x``, ``y``
+function editor:addTile(preset, x, y)
+
+    -- man why did i format this like this like cmon
+    self.attack_sequence
+        [ self.atpat_index ].hitting_spots
+            [ x ][ y ] = tile:new(preset)
+
 end
 
 return editor

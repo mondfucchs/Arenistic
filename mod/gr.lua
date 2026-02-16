@@ -7,12 +7,14 @@ local ref = {}
 
 -- attributes --
 
-gr.palette =
-{
-    black = { 13 /255, 10 /255, 11 /255 },
-    dusty = { 95 /255, 91 /255, 114/255 },
-    white = { 243/255, 239/255, 245/255 },
-    olive = { 112/255, 139/255, 117/255 }
+-- straight from
+gr.sizes = {
+    tile_wh = 10,
+    grid_x = 5,
+    grid_y = 5,
+    tiny_margin = 20,
+    cute_margin = 2,
+    mid_margin = 40,
 }
 
 -- methods --
@@ -26,42 +28,30 @@ end
 
 -- methods.draws --
 
-function gr.drawBackground()
-    love.graphics.setColor(gr.palette.white)
-    love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
-end
+local arena_canvas = love.graphics.newCanvas(80, 80)
+function gr.getDrawnArena()
 
--- rough draws ::temp
+    local grid   = ref.editor.attack_sequence[ ref.editor.atpat_index ].hitting_spots
+    local width  = ref.editor.arena_width
+    local height = ref.editor.arena_height
 
-function gr.drawCurrentAtpat()
+    love.graphics.setCanvas(arena_canvas)
+    love.graphics.clear()
 
-end
+    for x = 1, width do
+        for y = 1, height do
 
-function gr.drawAtpatList()
-    local x = 0
-    local y = love.graphics.getHeight() - 40
-    local w = love.graphics.getWidth() / ref.editor.sequence_size
-    local h = 40
+            local tile_center_x = gr.sizes.grid_x + (gr.sizes.tile_wh + gr.sizes.cute_margin) * (x - 1) + gr.sizes.tile_wh / 2
+            local tile_center_y = gr.sizes.grid_y + (gr.sizes.tile_wh + gr.sizes.cute_margin) * (y - 1) + gr.sizes.tile_wh / 2
 
-    for i = 1, ref.editor.sequence_size do
-        local atpat = ref.editor.attack_sequence[i]
+            grid[x][y]:draw(tile_center_x, tile_center_y)
 
-        love.graphics.setColor(gr.palette.dusty)
-        if i == ref.editor.atpat_index then
-            love.graphics.setColor(gr.palette.olive)
         end
-
-        love.graphics.rectangle("fill", x + 1, y + 1, w - 2, h - 2)
-        x = x + w
     end
-end
 
-function gr.drawEditorDebug()
-    love.graphics.setColor(gr.palette.black)
-    love.graphics.print(
-        "editor.atpat_index = " .. ref.editor.atpat_index .. "\n" ..
-        "editor.sequence_size = " .. ref.editor.sequence_size .. "\n",
-        10, 10)
+    love.graphics.setCanvas()
+    return arena_canvas
+
 end
 
 return gr

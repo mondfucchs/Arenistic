@@ -5,14 +5,20 @@ local editor = {}
 -- dependencies --
 
 local pmath = require("util.pmath")
+local tile  = require("util.tile")
 
 -- locales --
 
 local function getEmptyAtpat()
-    return {
-        hitting_spots =
-        { {}, {}, {}, {}, {}, {} }
-    }
+    local hitting_spots = {}
+    for i = 1, 6 do
+        hitting_spots[i] = {}
+        for j = 1, 6 do
+            hitting_spots[i][j] = tile:new("angry_wall")
+        end
+    end
+
+    return { hitting_spots = hitting_spots }
 end
 
 -- attributes --
@@ -20,6 +26,9 @@ end
 editor.attack_sequence = { getEmptyAtpat() }
 editor.sequence_size   = 1
 editor.atpat_index     = 1
+
+editor.arena_width     = 6
+editor.arena_height    = 6
 
 -- methods.internal --
 

@@ -1,4 +1,8 @@
 
+-- configs --
+
+love.graphics.setDefaultFilter("nearest", "nearest")
+
 -- dependencies --
 
 local mum           = require("mod.mum")
@@ -58,14 +62,11 @@ function love.update(dt)
 end
 
 function love.draw()
-    gr.drawBackground()
 
-    gr.drawAtpatList()
+    local drawn_arena = gr.getDrawnArena()
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.draw(drawn_arena, 0, 0, 0, 6, 6)
 
-    -- ::temp
-    if DEBUG then
-        gr.drawEditorDebug()
-    end
 end
 
 -- callbacks.input --

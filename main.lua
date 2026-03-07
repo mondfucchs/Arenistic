@@ -53,6 +53,7 @@ end
 function love.load()
     mum.setRef(ui, editor, gr)
     gr.setRef (ui, editor)
+    ui.setRef (gr, editor)
 end
 
 function love.update(dt)
@@ -66,6 +67,10 @@ function love.draw()
     local drawn_arena = gr.getDrawnArena()
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw(drawn_arena, 0, 0, 0, 6, 6)
+
+    if DEBUG then
+        gr.showDebug()
+    end
 
 end
 

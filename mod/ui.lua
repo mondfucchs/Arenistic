@@ -2,14 +2,23 @@
 -- Processes the inputs received and makes them into {mum} requests.
 local ui = {}
 
+-- references to other modules --
+
+local ref = {}
+
 -- dependencies --
 
 local mreq = require("util.mum-request")
 
 -- attributes --
 
+ui.mode = "placing" -- placing / 
+
 ui.previous_key = ""
 ui.previous_key_discard = .5
+
+-- Stores which tile is being hovered
+ui.hovering_tile = { x = 1, y = 1 }
 
 -- Keymap for one keys
 ui.single_keymap =
@@ -59,9 +68,25 @@ ui.double_keymap =
     end,
 }
 
+-- methods.internal --
+
+function ui.setRef(gr, editor)
+    ref.gr      = gr
+    ref.editor  = editor
+end
+
 -- methods.callbacks --
 
 function ui:update(dt)
+
+    -- Updating which tile has been hovered
+    local scaled_x = love.mouse.getX() / 6
+    local scaled_y = love.mouse.getY() / 6
+
+    self.hovering_tile.x =
+        math.ceil((scaled_x - ref.gr.sizes.grid_x) / (ref.gr.sizes.tile_wh + ref.gr.sizes.cute_margin))
+    self.hovering_tile.y =
+        math.ceil((scaled_y - ref.gr.sizes.grid_y) / (ref.gr.sizes.tile_wh + ref.gr.sizes.cute_margin))
 
     self.previous_key_discard = self.previous_key_discard - dt
 
@@ -73,7 +98,9 @@ function ui:update(dt)
 end
 
 function ui:mousepressed(x, y, button)
-
+    if ui.mode == "placing" then
+        ref.editor.addTile("angry_wall", self.hovering_tile.x, self.hovering_tile.y)
+    end
 end
 
 function ui:keypressed(key)

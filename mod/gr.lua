@@ -54,4 +54,12 @@ function gr.getDrawnArena()
 
 end
 
+-- ::debug
+function gr.showDebug()
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.print(
+        ref.ui.hovering_tile.x .. " " .. ref.ui.hovering_tile.y
+    )
+end
+
 return gr

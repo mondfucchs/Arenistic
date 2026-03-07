@@ -14,7 +14,7 @@ local function getEmptyAtpat()
     for i = 1, 6 do
         hitting_spots[i] = {}
         for j = 1, 6 do
-            hitting_spots[i][j] = tile:new("empty")
+            hitting_spots[i][j] = tile:new("breathe") -- ::debug+temp
         end
     end
 
@@ -59,6 +59,7 @@ end
 function editor:addTile(preset, x, y)
 
     -- man why did i format this like this like cmon
+    -- why don't this work like cmon
     self.attack_sequence
         [ self.atpat_index ].hitting_spots
             [ x ][ y ] = tile:new(preset)

@@ -99,7 +99,7 @@ end
 
 function ui:mousepressed(x, y, button)
     if ui.mode == "placing" then
-        ref.editor.addTile("angry_wall", self.hovering_tile.x, self.hovering_tile.y)
+        ref.editor:addTile("angry_wall", self.hovering_tile.x, self.hovering_tile.y)
     end
 end
 

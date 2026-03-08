@@ -57,6 +57,9 @@ function love.load()
 end
 
 function love.update(dt)
+    if not editor.attack_sequence then
+        error("someone disappeared!")
+    end
     mother(dt)
     -- modules
     ui:update(dt)

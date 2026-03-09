@@ -54,6 +54,20 @@ function gr.getDrawnArena()
 
 end
 
+function gr.drawHovering()
+
+    -- hovering tile coordinates
+    local x = ref.ui.hovering_tile.x
+    local y = ref.ui.hovering_tile.y
+
+    local tile_x = gr.sizes.grid_x + (gr.sizes.tile_wh + gr.sizes.cute_margin) * (x - 1)
+    local tile_y = gr.sizes.grid_y + (gr.sizes.tile_wh + gr.sizes.cute_margin) * (y - 1)
+
+    love.graphics.setColor(1, 1, 1, 0.5)
+    love.graphics.rectangle("fill", tile_x, tile_y, gr.sizes.tile_wh, gr.sizes.tile_wh)
+
+end
+
 -- ::debug
 function gr.showDebug()
     love.graphics.setColor(1, 1, 1)

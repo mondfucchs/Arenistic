@@ -68,8 +68,18 @@ do
 -- Inserts a tile of preset ``preset`` in current attack pattern in positions ``x``, ``y``
 function mum.insertTile(preset, x, y)
     return function ()
-        asset.sound.move:play()
+        asset.sound.collide:play()
         ref.editor:addTile(preset, x, y)
+
+        return true
+    end
+end
+
+-- Removes the tile in positions ``x``, ``y``
+function mum.removeTile(x, y)
+    return function ()
+        asset.sound.collide:play()
+        ref.editor:removeTile(x, y)
 
         return true
     end

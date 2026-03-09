@@ -1,9 +1,7 @@
 
 ->  functional
-    ( ) placing system
-        * identify hovering tile (DONE!)
-        * call editor to place
-          current tile there.
+    (*) placing system
+    (*) removing system
 
 ->  graphical
-    ( ) tile hovering border
+    (*) tile hovering border (wo)

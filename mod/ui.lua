@@ -9,10 +9,13 @@ local ref = {}
 -- dependencies --
 
 local mreq = require("util.mum-request")
+local tile = require("util.tile")
 
 -- attributes --
 
 ui.mode = "placing" -- placing / 
+
+ui.tile_preset = "squary_wall"
 
 ui.previous_key = ""
 ui.previous_key_discard = .5
@@ -98,9 +101,16 @@ function ui:update(dt)
 end
 
 function ui:mousepressed(x, y, button)
+
     if ui.mode == "placing" then
-        ref.editor:addTile("angry_wall", self.hovering_tile.x, self.hovering_tile.y)
+
+        if button == 1 then
+            mreq:send("insertTile", { self.tile_preset, self.hovering_tile.x, self.hovering_tile.y } )            
+        elseif button == 2 then
+            mreq:send("removeTile", { self.hovering_tile.x, self.hovering_tile.y } )
+        end
     end
+
 end
 
 function ui:keypressed(key)

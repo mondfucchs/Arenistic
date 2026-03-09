@@ -323,6 +323,12 @@ tile.breathe =
     end,
 }
 
+local preset_names = {}
+for k, _ in pairs(tile) do
+    table.insert(preset_names, k)
+end
+tile.preset_names = preset_names
+
 -- functions --
 
 -- returns a new tile with preset set as ``tile[preset]``

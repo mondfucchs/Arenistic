@@ -57,8 +57,12 @@ end
 
 -- Adds tile of preset ``preset`` into current attack pattern in position ``x``, ``y``
 function editor:addTile(preset, x, y)
-    -- man why did i format this like this like cmon
     self.attack_sequence[ self.atpat_index ].hitting_spots[ x ][ y ] = tile:new(preset)
+end
+
+-- Removes the tile in position ``x``, ``y``
+function editor:removeTile(x, y)
+    self.attack_sequence[ self.atpat_index ].hitting_spots[ x ][ y ] = tile:new("empty")
 end
 
 return editor

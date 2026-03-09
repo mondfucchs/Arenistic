@@ -25,7 +25,7 @@ PROCEDURE = "none"
 
 -- locales --
 
-local globalcanvas = love.graphics.newCanvas(80, 80)
+local globalcanvas = love.graphics.newCanvas(80, 90)
 
 -- Executes {mum} and updates tasks and orders inside mum_request
 local function mother(dt)
@@ -72,12 +72,15 @@ function love.draw()
     local drawn_arena = gr.getDrawnArena()
 
     globalcanvas:renderTo(function()
+
         love.graphics.clear()
 
         gr.drawHovering()
 
         love.graphics.setColor(1, 1, 1)
         love.graphics.draw(drawn_arena)
+
+        gr.displayAttackSequence()
 
     end)
 

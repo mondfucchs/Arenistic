@@ -1,7 +1,7 @@
 
 ->  functional
-    (*) placing system
-    (*) removing system
+    ( ) changing placement
 
 ->  graphical
-    (*) tile hovering border (wo)
+    (*) display attack-sequence
+    ( ) display different placements

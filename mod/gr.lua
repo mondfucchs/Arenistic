@@ -5,6 +5,10 @@ local gr = {}
 -- references to other modules
 local ref = {}
 
+-- dependencies --
+
+local asset = require("util.asset")
+
 -- attributes --
 
 -- straight from
@@ -65,6 +69,28 @@ function gr.drawHovering()
 
     love.graphics.setColor(1, 1, 1, 0.5)
     love.graphics.rectangle("fill", tile_x, tile_y, gr.sizes.tile_wh, gr.sizes.tile_wh)
+
+end
+
+function gr.displayAttackSequence()
+
+    local highlight_color = asset.color.default
+    local common_color    = asset.color.disabled
+
+    local height = 2
+    local width  = 80 / ref.editor.sequence_size
+    local ox, oy = 0, 90 - height
+
+    for i, _ in ipairs(ref.editor.attack_sequence) do
+
+        love.graphics.setColor( ref.editor.atpat_index == i and highlight_color or common_color)
+
+        love.graphics.rectangle(
+            "fill", ox + width * (i - 1), oy,
+            width, height
+        )
+
+    end
 
 end
 

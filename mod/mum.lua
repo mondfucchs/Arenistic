@@ -6,6 +6,7 @@ local mum = {}
 
 local asset = require("util.asset")
 local pmath = require("util.pmath")
+local tile  = require("util.tile")
 
 -- references to other modules
 local ref = {}
@@ -80,6 +81,36 @@ function mum.removeTile(x, y)
     return function ()
         asset.sound.collide:play()
         ref.editor:removeTile(x, y)
+
+        return true
+    end
+end
+
+end
+
+-- tasks: editing configs
+do
+
+function mum:setTilePreset()
+    local named = ref.ui.naming_string
+
+    return function()
+        if tile[named] then
+            -- Functional
+            ref.ui.tile_preset   = named
+            ref.ui.naming_string = ""
+            ref.ui.mode          = "placing"
+            -- so i go hahah
+            asset.sound.breathe:play()
+
+        else
+            -- Functional
+            ref.ui.naming_string = ""
+            ref.ui.mode          = "placing"
+            -- so i go buaaaaa
+            asset.sound.choke:play()
+
+        end
 
         return true
     end

@@ -94,11 +94,22 @@ function gr.displayAttackSequence()
 
 end
 
+function gr.displayNamingMode()
+    if ref.ui.mode == "naming" then
+        -- Background
+        love.graphics.setColor(0, 0, 0, .75)
+        love.graphics.rectangle("fill", 0, 0, 80 * 6, 90 * 6)
+        -- String
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.print(ref.ui.naming_string, 18, 18)
+    end
+end
+
 -- ::debug
 function gr.showDebug()
     love.graphics.setColor(1, 1, 1)
     love.graphics.print(
-        ref.ui.hovering_tile.x .. " " .. ref.ui.hovering_tile.y
+        ref.ui.mode
     )
 end
 

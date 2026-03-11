@@ -13,9 +13,11 @@ local tile = require("util.tile")
 
 -- attributes --
 
-ui.mode = "placing" -- placing / 
+ui.mode = "placing" -- placing / naming 
 
-ui.tile_preset = "squary_wall"
+ui.naming_string = ""
+
+ui.tile_preset = "attack_sharp"
 
 ui.previous_key = ""
 ui.previous_key_discard = .5
@@ -47,6 +49,22 @@ ui.single_keymap =
     end,
 }
 
+-- Keymap for naming
+ui.naming_keymap =
+{
+    ["return"] = function()
+        mreq:send("setTilePreset", {})
+    end,
+
+    ["backspace"] = function()
+        ui.naming_string = ui.naming_string:sub(1, #ui.naming_string - 1)
+    end,
+
+    ["escape"] = function()
+        ui.mode = "placing"
+    end
+}
+
 -- Keymap for two keys
 ui.double_keymap =
 {
@@ -63,6 +81,10 @@ ui.double_keymap =
     ["alt+d"] = function()
         DEBUG = not DEBUG
         return true
+    end,
+
+    ["ctrl+t"] = function()
+        ui.mode = "naming"
     end,
 
     -- ::debug key
@@ -114,16 +136,23 @@ function ui:mousepressed(x, y, button)
 end
 
 function ui:keypressed(key)
+
     -- Honestly, sorry father if i'm mislead, but i won't ever use those separatedly
     key = (key == "lctrl" or key == "rctrl") and "ctrl" or key
     key = (key == "lalt" or key == "ralt") and "alt" or key
 
-    -- checking for shortcuts
-    local double_keymap_found =
-        (self.double_keymap[self.previous_key .. "+" .. key] or function() end)()
+    if self.mode == "naming" then
+        (self.naming_keymap[key] or function() end)()
 
-    if not double_keymap_found then
-        (self.single_keymap[key] or function() end)()
+    elseif self.mode == "placing" then
+
+        -- checking for shortcuts
+        local double_keymap_found =
+            (self.double_keymap[self.previous_key .. "+" .. key] or function() end)()
+
+        if not double_keymap_found then
+            (self.single_keymap[key] or function() end)()
+        end
     end
 
     self.previous_key_discard = .5
@@ -131,7 +160,9 @@ function ui:keypressed(key)
 end
 
 function ui:textinput(char)
-
+    if ui.mode == "naming" then
+        ui.naming_string = ui.naming_string .. char
+    end
 end
 
 return ui

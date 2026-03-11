@@ -87,6 +87,8 @@ function love.draw()
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw(globalcanvas, 0, 0, 0, 6, 6)
 
+    gr.displayNamingMode()
+
     if DEBUG then
         gr.showDebug()
     end

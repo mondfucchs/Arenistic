@@ -14,7 +14,7 @@ local function getEmptyAtpat()
     for i = 1, 6 do
         hitting_spots[i] = {}
         for j = 1, 6 do
-            hitting_spots[i][j] = tile:new("breathe") -- ::debug+temp
+            hitting_spots[i][j] = tile:new("empty") -- ::debug+temp
         end
     end
 
@@ -57,7 +57,12 @@ end
 
 -- Adds tile of preset ``preset`` into current attack pattern in position ``x``, ``y``
 function editor:addTile(preset, x, y)
-    self.attack_sequence[ self.atpat_index ].hitting_spots[ x ][ y ] = tile:new(preset)
+    if (x > 6 or x < 1) or (y > 6 or y < 1) then
+        return
+    end
+
+    self.attack_sequence[ self.atpat_index ].
+        hitting_spots[ x ][ y ] = tile:new(preset)
 end
 
 -- Removes the tile in position ``x``, ``y``

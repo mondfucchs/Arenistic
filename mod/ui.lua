@@ -18,6 +18,7 @@ ui.mode = "placing" -- placing / naming
 ui.naming_string = ""
 
 ui.tile_preset = "attack_sharp"
+ui.previous_tile_presets = {}
 
 ui.previous_key = ""
 ui.previous_key_discard = .5
@@ -48,6 +49,18 @@ ui.single_keymap =
         return true
     end,
 }
+
+-- (filling ui.single_keymap with a few copycats)
+for i = 1, 9 do
+    local func = function()
+        ui.naming_string = ui.previous_tile_presets[i]
+        mreq:send("setTilePreset", { true })
+        return true
+    end
+
+    ui.single_keymap["kp" .. i] = func
+    ui.single_keymap[tostring(i)] = func
+end
 
 -- Keymap for naming
 ui.naming_keymap =
@@ -153,6 +166,7 @@ function ui:keypressed(key)
         if not double_keymap_found then
             (self.single_keymap[key] or function() end)()
         end
+
     end
 
     self.previous_key_discard = .5

@@ -1,6 +1,7 @@
 
 ->  functional
-    ( ) changing placement
 
 ->  graphical
-    ( ) display different placements
+
+->  repository
+    ( ) update readme with new shortcuts

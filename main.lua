@@ -18,7 +18,7 @@ table.unpack = table.unpack or unpack
 
 -- globals --
 
-DEBUG = true
+DEBUG = false
 -- Current procress
 -- (*NOTE: this is vague. I wanted it to be some kind of "game mode", but I can't imagine a good implementation of this by now.)
 PROCEDURE = "none"

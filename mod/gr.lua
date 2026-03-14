@@ -96,12 +96,21 @@ end
 
 function gr.displayNamingMode()
     if ref.ui.mode == "naming" then
+
         -- Background
         love.graphics.setColor(0, 0, 0, .75)
         love.graphics.rectangle("fill", 0, 0, 80 * 6, 90 * 6)
-        -- String
+        -- Naming string
         love.graphics.setColor(1, 1, 1)
         love.graphics.print(ref.ui.naming_string, 18, 18)
+
+        -- Previous tiles for fast access
+        love.graphics.setColor(.8, .8, .8)
+        for i, str in ipairs(ref.ui.previous_tile_presets) do
+            love.graphics.print(i, 18, 18 + i*16)
+            love.graphics.print(str, 18 + 16, 18 + i*16)
+        end
+
     end
 end
 

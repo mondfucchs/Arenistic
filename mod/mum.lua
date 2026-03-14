@@ -91,7 +91,7 @@ end
 -- tasks: editing configs
 do
 
-function mum:setTilePreset()
+function mum:setTilePreset( unsave )
     local named = ref.ui.naming_string
 
     return function()
@@ -100,6 +100,7 @@ function mum:setTilePreset()
             ref.ui.tile_preset   = named
             ref.ui.naming_string = ""
             ref.ui.mode          = "placing"
+            if not unsave then table.insert(ref.ui.previous_tile_presets, named) end
             -- so i go hahah
             asset.sound.breathe:play()
 

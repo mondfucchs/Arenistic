@@ -1,7 +1,7 @@
 # Arenistic
 ## Summary
 
-Arenistic is **Hello Eckert**'s attack/battle editor. And also a cheap study of software engineering, as the majority of my projects theoretically are ('¯ _ ¯)
+Arenistic is **Hello Eckert**'s crude attack/battle editor. And also a cheap study of software engineering, as the majority of my projects theoretically are ("¯ _ ¯)
 
 ## Shortcuts
 
@@ -13,3 +13,6 @@ Arenistic is **Hello Eckert**'s attack/battle editor. And also a cheap study of 
 | Left arrow | Moves to the previous attack patern |
 | CTRL + Right arrow | Moves to the last attack pattern |
 | CTRL + Left arrow | Moves to the first attack patern |
+| CTRL + T | Opens tile search |
+| Enter | Submit tile search |
+| 1 ... 9 | Selects recent tiles |

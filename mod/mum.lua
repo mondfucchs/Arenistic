@@ -30,6 +30,7 @@ do
 function mum.addAtpat()
     return function()
         ref.editor:addAtpat()
+        asset.sound.hurt:play()
         return true
     end
 end
@@ -40,6 +41,7 @@ function mum.deleteCurrentAtpat()
         if ref.editor.sequence_size > 1 then
             ref.editor:deleteAtpat(ref.editor.atpat_index)
         end
+        asset.sound.hurt:play()
         return true
     end
 end
@@ -49,11 +51,12 @@ function mum.moveAtpatIndex(d)
     return function()
         ref.editor.atpat_index =
             pmath.clamp( ref.editor.atpat_index + d, 1, ref.editor.sequence_size )
+        asset.sound.move:play()
         return true
     end
 end
 
--- Moves the {editor}'s atpat_index ``d`` units
+-- Moves the {editor}'s atpat_index to the ``to``
 function mum.exhaustAtpatIndex(to)
     return function()
         ref.editor.atpat_index = ( to == "beginning" and 1 or ref.editor.sequence_size )
@@ -91,7 +94,7 @@ end
 -- tasks: editing configs
 do
 
-function mum:setTilePreset( unsave )
+function mum.setTilePreset( unsave )
     local named = ref.ui.naming_string
 
     return function()
@@ -102,7 +105,7 @@ function mum:setTilePreset( unsave )
             ref.ui.mode          = "placing"
             if not unsave then table.insert(ref.ui.previous_tile_presets, named) end
             -- so i go hahah
-            asset.sound.breathe:play()
+            asset.sound.heal:play()
 
         else
             -- Functional

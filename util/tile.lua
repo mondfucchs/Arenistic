@@ -43,6 +43,7 @@ end
 
 tile.empty =
 {
+    name = "empty",
     type = "empty",
     draw = function()
         -- :) hello!!
@@ -60,6 +61,7 @@ tile.empty =
 
 tile.alert_good =
 {
+    name = "alert_good",
     type = "alert",
     becomes = "healthy_common",
 
@@ -79,6 +81,7 @@ tile.alert_good =
 }
 tile.alert_common =
 {
+    name = "alert_common",
     type = "alert",
     becomes = "attack_sharp",
 
@@ -98,6 +101,7 @@ tile.alert_common =
 }
 tile.alert_angry_wall =
 {
+    name = "alert_angry_wall",
     type = "alert",
     becomes = "angry_wall",
 
@@ -113,6 +117,7 @@ tile.alert_angry_wall =
 }
 tile.alert_portal =
 {
+    name = "alert_portal",
     type = "alert",
     becomes = "portal",
 
@@ -135,6 +140,7 @@ tile.alert_portal =
 
 tile.healthy_common =
 {
+    name = "healthy_common",
     type = "healthy",
     life = 3,
     heal = 3,
@@ -163,6 +169,7 @@ tile.healthy_common =
 
 tile.attack_sharp =
 {
+    name = "attack_sharp",
     type = "attack",
     life = 3,
     damage = 2,
@@ -192,6 +199,7 @@ tile.attack_sharp =
 
 tile.squary_wall =
 {
+    name = "squary_wall",
     type = "wall",
     life = 9,
     excited = 0,
@@ -224,6 +232,7 @@ tile.squary_wall =
 }
 tile.angry_wall =
 {
+    name = "angry_wall",
     type = "wall",
     life = 9,
     damage = 2,
@@ -261,6 +270,7 @@ tile.angry_wall =
 
 tile.portal =
 {
+    name    = "portal",
     type    = "misc",
     life    = 6,
     excited = 0,
@@ -302,6 +312,7 @@ tile.portal =
 
 tile.breathe =
 {
+    name = "breathe",
     type = "whim",
     life = 2,
     excited = 0,

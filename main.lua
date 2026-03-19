@@ -54,11 +54,10 @@ end
 -- callbacks --
 
 function love.load()
-    mum.setRef(ui, editor, gr)
-    gr.setRef (ui, editor)
-    ui.setRef (gr, editor) 
-    salo.setRef(editor)
-    salo.load("test")
+    mum.    setRef(ui, editor, gr)
+    gr.     setRef (ui, editor)
+    ui.     setRef (gr, editor)
+    salo.   setRef(editor)
 end
 
 function love.update(dt)

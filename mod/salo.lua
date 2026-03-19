@@ -2,6 +2,10 @@
 -- Saves (sa) and loads (lo) attack sequences.
 local salo = {}
 
+-- dependencies -- could suck
+
+local tile = require("util.tile")
+
 -- Each tile has a specific code two number code for it.
 local tilecode =
 {
@@ -21,11 +25,25 @@ local tilecode =
     [15] = "squary_wall",
 }
 
+local codetile =
+{
+    ["empty"] = "00",
+    ["breathe"] = "99",
+
+    ["alert_common"] = "01",
+    ["alert_good"] = "02",
+    ["alert_angry_wall"] = "03",
+    ["alert_portal"] = "04",
+    ["alert_squary_wall"] = "05", -- todo
+
+    ["attack_sharp"] = "11",
+    ["healthy_common"] = "12",
+    ["angry_wall"] = "13",
+    ["portal"] = "14",
+    ["squary_wall"] = "15",
+}
+
 local ref = {}
-
--- dependencies -- could suck
-
-local tile = require("util.tile")
 
 -- attributes --
 
@@ -88,6 +106,34 @@ function salo.load(filename)
     table.remove(attack_sequence)
     ref.editor:loadAttseq(attack_sequence)
 
+    file:close()
+end
+
+-- Saves current attack sequence in ``saves/(filename).atse``.
+function salo.save(filename)
+
+    local path = "saves/" .. filename .. ".atse"
+    local file = io.open(path, "w")
+    if not file then error("\"" .. path .. "\" can't exist.") end
+
+    local last_i = ref.editor.sequence_size
+    local attseq = ref.editor.attack_sequence
+    for _, atpat in ipairs(attseq) do
+
+        for x = 1, 6 do
+
+            for y = 1, 6 do
+                local t = atpat.hitting_spots[x][y]
+                file:write(codetile[t.name])
+            end
+
+            file:write("\n")
+
+        end
+
+    end
+
+    file:close()
 end
 
 

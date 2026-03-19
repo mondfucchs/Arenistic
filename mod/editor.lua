@@ -9,7 +9,7 @@ local tile  = require("util.tile")
 
 -- locales --
 
-local function getEmptyAtpat()
+function getEmptyAtpat()
     local hitting_spots = {}
     for i = 1, 6 do
         hitting_spots[i] = {}
@@ -31,6 +31,20 @@ editor.arena_width     = 6
 editor.arena_height    = 6
 
 -- methods.internal --
+
+-- Loads an attack sequence (usually caled by {salo})
+function editor:loadAttseq(attseq)
+
+    -- Honestly, if this project was supposed to be bigger and used
+    -- by other people, it would be interesting to code a kind of "proxy"
+    -- or verification to check if the parameter attseq is even a valid
+    -- attack sequence. However, this works just fine for my purposes.
+
+    self.sequence_size   = #attseq
+    self.atpat_index     = pmath.clamp( self.atpat_index, 1, self.sequence_size )
+    self.attack_sequence = attseq
+
+end
 
 -- Adds one more attack pattern into ``attack_sequence``
 function editor:addAtpat()

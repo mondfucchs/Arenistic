@@ -6,6 +6,7 @@ love.graphics.setDefaultFilter("nearest", "nearest")
 -- dependencies --
 
 local mum           = require("mod.mum")
+local salo          = require("mod.salo")
 local gr            = require("mod.gr")
 local ui            = require("mod.ui")
 local editor        = require("mod.editor")
@@ -55,10 +56,14 @@ end
 function love.load()
     mum.setRef(ui, editor, gr)
     gr.setRef (ui, editor)
-    ui.setRef (gr, editor)
+    ui.setRef (gr, editor) 
+    salo.setRef(editor)
+    salo.load("test")
 end
 
 function love.update(dt)
+    
+
     if not editor.attack_sequence then
         error("someone disappeared!")
     end

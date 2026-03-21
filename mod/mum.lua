@@ -15,10 +15,11 @@ local ref = {}
 -- methods.internal --
 
 -- Sets the references of the other modules
-function mum.setRef(ui, editor, gr)
+function mum.setRef(ui, editor, gr, salo)
     ref.ui      = ui
     ref.editor  = editor
     ref.gr      = gr
+    ref.salo    = salo
 end
 
 -- methods.tasks --
@@ -118,6 +119,54 @@ function mum.setTilePreset( unsave )
 
         return true
     end
+end
+
+function mum.setFilename()
+    local named = ref.ui.naming_string
+
+    return function()
+        -- Functional
+        ref.ui.filename = named
+        ref.ui.naming_string = ""
+        ref.ui.mode          = "placing"
+        -- Soigoha
+        asset.sound.heal:play()
+
+        return true
+    end
+end
+
+end
+
+-- tasks: storing and loading
+do
+
+function mum.loadAttseq(quietly)
+
+    -- Functional
+    ref.salo.load(ref.ui.filename)
+
+    return function()
+        if quietly then return true end
+        -- So i go hahaha
+        asset.sound.portal:play()
+        return true
+    end
+
+end
+
+function mum.saveAttseq(quietly)
+
+    -- Functional
+    ref.salo.save(ref.ui.filename)
+
+    return function()
+        if quietly then return true end
+        -- So i go hahaha wait is it the same code NOOOO AND THE DRY PRINCPLE!!!??
+        asset.sound.portal:play()
+        return true
+    end
+
 end
 
 end

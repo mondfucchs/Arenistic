@@ -1,12 +1,6 @@
 
 ->  functional
-    ( ) saving module
-        ( ) decide storing method
-        ( ) convert into it
-        ( ) convert out of it
+    ( ) mom saving
+    ( ) mom loading
 
 ->  graphical
-    ( ) saving indicate
-
-
-    ummm ey girl it's fucked up okay give your jumps ig

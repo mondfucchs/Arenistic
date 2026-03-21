@@ -54,9 +54,9 @@ end
 -- callbacks --
 
 function love.load()
-    mum.    setRef(ui, editor, gr)
-    gr.     setRef (ui, editor)
-    ui.     setRef (gr, editor)
+    mum.    setRef(ui, editor, gr, salo)
+    gr.     setRef(ui, editor)
+    ui.     setRef(gr, editor, salo)
     salo.   setRef(editor)
 end
 

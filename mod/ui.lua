@@ -15,10 +15,14 @@ local tile = require("util.tile")
 
 ui.mode = "placing" -- placing / naming 
 
+-- Stores what is being named so adequate mum request can be made
+ui.naming_what = "" -- tile / filename
 ui.naming_string = ""
 
 ui.tile_preset = "attack_sharp"
 ui.previous_tile_presets = {}
+
+ui.filename = "mauchly1"
 
 ui.previous_key = ""
 ui.previous_key_discard = .5
@@ -66,7 +70,13 @@ end
 ui.naming_keymap =
 {
     ["return"] = function()
-        mreq:send("setTilePreset", {})
+        if ui.naming_what == "tile" then
+            mreq:send("setTilePreset", {})
+
+        elseif ui.naming_what == "filename" then
+            mreq:send("setFilename", {})
+
+        end
     end,
 
     ["backspace"] = function()
@@ -98,6 +108,24 @@ ui.double_keymap =
 
     ["ctrl+t"] = function()
         ui.mode = "naming"
+        ui.naming_what = "tile"
+        return true
+    end,
+
+    ["ctrl+f"] = function()
+        ui.mode = "naming"
+        ui.naming_what = "filename"
+        return true
+    end,
+
+    ["ctrl+s"] = function()
+        mreq:send("saveAttseq", {})
+        return true
+    end,
+
+    ["ctrl+l"] = function()
+        mreq:send("loadAttseq", {})
+        return true
     end,
 
     -- ::debug key
@@ -108,9 +136,10 @@ ui.double_keymap =
 
 -- methods.internal --
 
-function ui.setRef(gr, editor)
+function ui.setRef(gr, editor, salo)
     ref.gr      = gr
     ref.editor  = editor
+    ref.salo    = salo
 end
 
 -- methods.callbacks --
